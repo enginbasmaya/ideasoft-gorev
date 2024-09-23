@@ -1,0 +1,32 @@
+CREATE TABLE products (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    category INT,
+    price DECIMAL(10, 2),
+    stock INT
+);
+
+CREATE TABLE customers (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    since DATE,
+    revenue DECIMAL(10, 2)
+);
+
+CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    customerId INT,
+    total DECIMAL(10, 2),
+    FOREIGN KEY (customerId) REFERENCES customers(id)
+);
+
+CREATE TABLE order_items (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    orderId INT,
+    productId INT,
+    quantity INT,
+    unitPrice DECIMAL(10, 2),
+    total DECIMAL(10, 2),
+    FOREIGN KEY (orderId) REFERENCES orders(id),
+    FOREIGN KEY (productId) REFERENCES products(id)
+);
